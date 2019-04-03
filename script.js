@@ -43,6 +43,10 @@ const quotes = [
 	},
 ];
 
+document.querySelector('#new-quote').addEventListener('click', getRandomQuote);
+
+
+
 function getRandomQuote() {
     return document.querySelector('#text').innerHTML = quotes[Math.floor(Math.random() * quotes.length)].quote;
 
