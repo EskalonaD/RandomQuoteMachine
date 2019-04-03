@@ -43,11 +43,23 @@ const quotes = [
 	},
 ];
 
-document.querySelector('#new-quote').addEventListener('click', getRandomQuote);
+document.querySelector('#new-quote').addEventListener('click', postQuoteFields);
 
 
+function postQuoteFields(){
+    const quote = getRandomQuote(quotes);
 
-function getRandomQuote() {
-    return document.querySelector('#text').innerHTML = quotes[Math.floor(Math.random() * quotes.length)].quote;
+    postQuote(quote);
+    postAuthor(quote);
+} 
 
+function getRandomQuote (arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function postAuthor(obj) {
+    document.querySelector('#author').innerHTML = obj.source;
+}
+function postQuote(obj) {
+    document.querySelector('#text').innerHTML = obj.quote;
 }
