@@ -43,11 +43,13 @@ const quotes = [
 	},
 ];
 
+
+postQuoteFields();
 document.querySelector('#new-quote').addEventListener('click', postQuoteFields);
 
 
 function postQuoteFields(){
-    const quote = getRandomQuote(quotes);
+    const quote = getRandomQuote(ignoreCurrentQuote(quotes));
 
     postQuote(quote);
     postAuthor(quote);
@@ -62,4 +64,16 @@ function postAuthor(obj) {
 }
 function postQuote(obj) {
     document.querySelector('#text').innerHTML = obj.quote;
+}
+
+function ignoreCurrentQuote (arr) {
+    const currentQuote = document.querySelector('#text').innerHTML;
+    console.log(currentQuote);
+
+    return arr.reduce( (prevValue, curValue) => {
+        if (curValue.quote !== currentQuote) {
+            prevValue.push(curValue);
+        } 
+        return prevValue;
+    }, [])
 }
