@@ -1,0 +1,26 @@
+/* Basic CSS */ 
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+}
+
+ul,ol {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Document's CSS */
+
+.wrapper {
+margin-left: auto;
+margin-right: auto;
+}
