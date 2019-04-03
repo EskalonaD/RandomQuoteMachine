@@ -42,3 +42,8 @@ const quotes = [
 		tags: "Business",
 	},
 ];
+
+function getRandomQuote() {
+    return document.querySelector('#text').innerHTML = quotes[Math.floor(Math.random() * quotes.length)].quote;
+
+}
