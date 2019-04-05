@@ -1,0 +1,27 @@
+1. The #quote-box wrapper element should be horizontally centered. Please run tests with browser's zoom level at 100% and page maximized.
+---
+DONE
+
+2. On first load, my quote machine displays a random quote in the element with id="text".
+---
+DONE / ALTERNATIVE WAY
+
+3. On first load, my quote machine displays the random quote's author in the element with id="author".
+---
+DONE / ALTERNATIVE WAY
+
+4. When the #new-quote button is clicked, my quote machine should fetch a new quote and display it in the #text element.
+---
+ALTERNATIVE WAY
+
+5. My quote machine should fetch the new quote's author when the #new-quote button is clicked and display it in the #author element.
+---
+ALTERNATIVE WAY
+
+6. I can tweet the current quote by clicking on the #tweet-quote a element. This a element should include the "twitter.com/intent/tweet" path in it's href attribute to tweet the current quote.
+---
+
+7. Test project with this js-bundle: https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js
+---
+
+7. Create pretty nice design for project.
