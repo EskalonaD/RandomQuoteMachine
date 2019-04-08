@@ -4,19 +4,19 @@ DONE
 
 2. On first load, my quote machine displays a random quote in the element with id="text".
 ---
-DONE / ALTERNATIVE WAY
+DONE 
 
 3. On first load, my quote machine displays the random quote's author in the element with id="author".
 ---
-DONE / ALTERNATIVE WAY
+DONE 
 
 4. When the #new-quote button is clicked, my quote machine should fetch a new quote and display it in the #text element.
 ---
-ALTERNATIVE WAY
+DONE
 
 5. My quote machine should fetch the new quote's author when the #new-quote button is clicked and display it in the #author element.
 ---
-ALTERNATIVE WAY
+DONE
 
 6. I can tweet the current quote by clicking on the #tweet-quote a element. This a element should include the "twitter.com/intent/tweet" path in it's href attribute to tweet the current quote.
 ---
