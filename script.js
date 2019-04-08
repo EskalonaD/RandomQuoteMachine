@@ -1,76 +1,34 @@
-const quotes = [
-	{
-		quote: "The only thing to fear is fear itself.",
-		source: "Franklin Delano Roosevelt",
-		citation: "First Inaugural Address",
-		year: 1932,
-		tags: "Business"
-	},
-	{
-		quote: "That's one small step for man, one giant leap for mankind.",
-		source: "Neil Armstrong",
-		citation: "The moon",
-		year: 1969,
-		tags: "Space Travel",
-	},
-	{
-		quote: "It always seems impossible until it is done.",
-		source: "Nelson Mandela",
-		citation: "",
-		year: "1918 - 2013",
-		tags: "Politics",
-	},
-	{
-		quote: "Not everything that can be counted counts, and not everything that counts can be counted.",
-		source: "Albert Einstein",
-		citation: "",
-		year: "1879 - 1955",
-		tags: "Engineering",
-	},
-	{
-		quote: "What we think, we become",
-		source: "Buddha",
-		citation: "",
-		year: "",
-		tags: "Faith",
-	},
-	{
-		quote: "Dream big and dare to fail",
-		source: "Norman Vaughan",
-		citation: "",
-		year: "1905 - 2005",
-		tags: "Business",
-	},
-];
-
 let currentQuote =  ``;
 
 postQuoteFields();
-
 document.querySelector('#new-quote').addEventListener('click', postQuoteFields);
 
 
-function postQuoteFields(){
-    const quoteObj = getRandomQuote(ignoreCurrentQuote(quotes));
+function postQuoteFields() {
+	fetch(`https://cors-anywhere.herokuapp.com/http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=${Math.floor(Math.random() * 43)}`)
+		.then(data => data.json()).then(data =>{
+			
+			let random = Math.floor(Math.random() * data.length);
+			
+			if(data[random].content === currentQuote){
+				if(data.length === 1) {
+					return postQuoteFields();
+				}
+				random = random === 0 ? data.length - 1 : random - 1;
+			}
 
-    postQuote(quoteObj);
-	postAuthor(quoteObj);
-	currentQuote = quoteObj.quote;
-    
-} 
+			postQuote(data[random]);
+			postAuthor(data[random]);
+			currentQuote = data[random].content;
+		});
+};
 
-function getRandomQuote (arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+function postAuthor({title}) {
+	document.querySelector('#author').innerHTML = title;
 }
 
-function postAuthor({source}) {
-    document.querySelector('#author').innerHTML = source;
-}
-
-function postQuote({quote}) {
-    document.querySelector('#text').innerHTML = quote;
-}
-
-function ignoreCurrentQuote (arr) {
-    return arr.filter( (value) => value.quote !== currentQuote)
-}
+function postQuote({content}) {
+	document.querySelector('#text').innerHTML = content;
+};
+		
+			
