@@ -1,34 +1,32 @@
-let currentQuote =  ``;
+let currentQuote = ``;
 
 postQuoteFields();
 document.querySelector('#new-quote').addEventListener('click', postQuoteFields);
+document.querySelector('#tweet-quote').addEventListener('click', () => {
+    window.location.href = `https://www.twitter.com/intent/tweet?text=${currentQuote}`;
+})
 
 
 function postQuoteFields() {
-	fetch(`https://cors-anywhere.herokuapp.com/http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=${Math.floor(Math.random() * 43)}`)
-		.then(data => data.json()).then(data =>{
-			
-			let random = Math.floor(Math.random() * data.length);
-			
-			if(data[random].content === currentQuote){
-				if(data.length === 1) {
-					return postQuoteFields();
-				}
-				random = random === 0 ? data.length - 1 : random - 1;
-			}
+    fetch(`https://cors-anywhere.herokuapp.com/https://quotesondesign.com/wp-json/wp/v2/posts/?orderby=rand`, {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'GET'
+    })
+    .then(data => data.json())
+    .then(data => {
+        let random = Math.floor(Math.random() * data.length);
 
-			postQuote(data[random]);
-			postAuthor(data[random]);
-			currentQuote = data[random].content;
-		});
+        postQuote(data[random]);
+        postAuthor(data[random]);
+        currentQuote = data[random].content.rendered.replace('<p>', '').replace('</p>', '');
+    });
 };
 
-function postAuthor({title}) {
-	document.querySelector('#author').innerHTML = title;
+function postAuthor({ title: { rendered } }) {
+    document.querySelector('#author').innerHTML = rendered;
 }
 
-function postQuote({content}) {
-	document.querySelector('#text').innerHTML = content;
+function postQuote({ content: { rendered } }) {
+    console.log(rendered)
+    document.querySelector('#text').innerHTML = rendered;
 };
-		
-			
